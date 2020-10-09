@@ -1,64 +1,37 @@
-<h1>HTML5カメラ</h1>
-
-<video id="camera" width="300" height="200"></video><br>
-<form>
-  <button type="button" id="shutter">シャッター</button>
-</form><br><br>
-<canvas id="picture" width="300" height="200"></canvas>
-<form>
-  <a type="button" href="/home/next1">取り込み</a>
-</form>
-
-<audio id="se" preload="auto">
-  <source src="camera-shutter1.mp3" type="audio/mp3">
-</audio>
+<h1>カメラ</h1>
 
 <script>
-window.onload = () => {
-  const video  = document.querySelector("#camera");
-  const canvas = document.querySelector("#picture");
-  const se     = document.querySelector('#se');
-
-  /** カメラ設定 */
-  const constraints = {
-    audio: false,
+  var constraints = {
     video: {
-      width: 1280,
-      height: 960,
-      //facingMode: "user"   // フロントカメラを利用する
-      facingMode: { exact: "environment" }  // リアカメラを利用する場合
-    }
+      mandatory: {
+        maxWidth: 320,
+        maxHeight: 240
+      }
+    },
+    audio: false
   };
 
-  /**
-   * カメラを<video>と同期
-   */
-  navigator.mediaDevices.getUserMedia(constraints)
-  .then( (stream) => {
-    video.srcObject = stream;
-    video.onloadedmetadata = (e) => {
-      video.play();
-    };
-  })
-  .catch( (err) => {
-    console.log(err.name + ": " + err.message);
-  });
-
-  /**
-   * シャッターボタン
-   */
-   document.querySelector("#shutter").addEventListener("click", () => {
-    const ctx = canvas.getContext("2d");
-
-    // 演出的な目的で一度映像を止めてSEを再生する
-    video.pause();  // 映像を停止
-    se.play();      // シャッター音
-    setTimeout( () => {
-      video.play();    // 0.5秒後にカメラ再開
-    }, 500);
-
-    // canvasに画像を貼り付ける
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  });
-};
+  navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(function (stream) {
+  stream = stream;
+  video = document.getElementById('video');
+  video.src = window.URL.createObjectURL(stream);
+  video.play();
+  setTimeout(function() {
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var w = video.offsetWidth;
+    var h = video.offsetHeight;
+    canvas.setAttribute('width', w);
+    canvas.setAttribute('height', h);
+    ctx.drawImage(video, 0, 0, w, h);
+    canvas.toBlob(function(blob) {
+      var img = document.getElementById('image');
+      img.src = window.URL.createObjectURL(blob);
+    }, 'image/jpeg', 0.95);
+    stream.getTracks()[0].stop();
+  }, 3000);
+}).catch(function (error) {
+  console.error('mediaDevice.getUserMedia() error:', error);
+  return;
+});
 </script>
