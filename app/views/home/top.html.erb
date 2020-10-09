@@ -21,10 +21,11 @@ window.onload = () => {
 
   /** カメラ設定 */
   const constraints = {
+    var video2 = document.getElementById('camera');
     audio: false,
     video: {
-      width: 640,
-      height: 480,
+      width: video2.clientWidth,
+      height: video2.clientheight,
       //facingMode: "user"   // フロントカメラを利用する
       facingMode: { exact: "environment" }  // リアカメラを利用する場合
     }
