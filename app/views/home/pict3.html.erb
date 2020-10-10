@@ -3,6 +3,16 @@
 <script>
   const video  = document.querySelector("#camera");
 
+  function notify_change_size() {
+      var video = document.getElementById('camera');
+      video_layout_width  = video.clientWidth * 0.5
+      video_layout_height = video.clientHeight * 0.5
+  }
+
+  var videoElement = document.querySelector('video#camera');
+  //onresizeメッセージのコールバック関数を設定する
+  videoElement.onresize = notify_change_size;
+
   const constraints = {
     audio: false,
     video: {
