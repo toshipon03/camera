@@ -9,6 +9,7 @@
   <button type="button" id="shutter">シャッター</button>
 </form><br><br>
 <canvas id="picture" width="300" height="200"></canvas>
+<canvas2 id="picture"></canvas2>
 <form>
   <a type="button" href="/home/next1">取り込み</a>
 </form>
@@ -53,6 +54,7 @@ window.onload = () => {
    */
    document.querySelector("#shutter").addEventListener("click", () => {
     const ctx = canvas.getContext("2d");
+    const ctx2 = canvas2.getContext("2d");
 
     // 演出的な目的で一度映像を止めてSEを再生する
     video.pause();  // 映像を停止
@@ -63,6 +65,7 @@ window.onload = () => {
 
     // canvasに画像を貼り付ける
     ctx.drawImage(video, 0, 0, video.width, video.height);
+    ctx2.drawImage(video)
   });
 };
 </script>
