@@ -1,6 +1,8 @@
 <video id="camera" width="720px" autoplay></video>
 
 <script>
+
+
   function notify_change_size() {
       var video = document.getElementById('camera');
       video_layout_width  = video.clientWidth
@@ -10,4 +12,32 @@
   var videoElement = document.querySelector('video#camera');
   //onresizeメッセージのコールバック関数を設定する
   videoElement.onresize = notify_change_size;
+
+  const constraints = {
+    audio: false,
+    video: {
+      width: 1280,
+      height: 960,
+      //facingMode: "user"   // フロントカメラを利用する
+      facingMode: { exact: "environment" }  // リアカメラを利用する場合
+
+    }
+  };
+
+  /**
+   * カメラを<video>と同期
+   */
+  navigator.mediaDevices.getUserMedia(constraints)
+  .then( (stream) => {
+    video.srcObject = stream;
+    video.onloadedmetadata = (e) => {
+      video.play();
+    let vwidth = element.videoWidth ;
+    let vheight = element.videoHeight ;
+    document.write("test" );
+    };
+  })
+  .catch( (err) => {
+    console.log(err.name + ": " + err.message);
+  });
 </script>
