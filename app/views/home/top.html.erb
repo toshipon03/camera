@@ -19,6 +19,9 @@
 </audio>
 
 <script>
+  //document.write("値は"+vwidth);
+  let test = "aaa"
+  document.write("test" + test);
 window.onload = () => {
   const video  = document.querySelector("#camera");
   const canvas = document.querySelector("#picture");
@@ -30,10 +33,11 @@ window.onload = () => {
   const constraints = {
     audio: false,
     video: {
-      width: 1280,
-      height: 960,
+      //width: 1280,
+      //height: 960,
       //facingMode: "user"   // フロントカメラを利用する
       facingMode: { exact: "environment" }  // リアカメラを利用する場合
+
     }
   };
 
@@ -45,12 +49,14 @@ window.onload = () => {
     video.srcObject = stream;
     video.onloadedmetadata = (e) => {
       video.play();
+    let vwidth = element.videoWidth ;
+		let vheight = element.videoHeight ;
     };
   })
   .catch( (err) => {
     console.log(err.name + ": " + err.message);
   });
-
+document.write(vwidth);
   /**
    * シャッターボタン
    */
