@@ -3,16 +3,6 @@
 <script>
 
 
-  function notify_change_size() {
-      var video = document.getElementById('camera');
-      video_layout_width  = video.clientWidth
-      video_layout_height = video.clientHeight
-  }
-
-  var videoElement = document.querySelector('video#camera');
-  //onresizeメッセージのコールバック関数を設定する
-  videoElement.onresize = notify_change_size;
-
   const constraints = {
     audio: false,
     video: {
@@ -32,9 +22,6 @@
     video.srcObject = stream;
     video.onloadedmetadata = (e) => {
       video.play();
-    let vwidth = element.videoWidth ;
-    let vheight = element.videoHeight ;
-    document.write("test" );
     };
   })
   .catch( (err) => {
