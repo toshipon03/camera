@@ -1,3 +1,18 @@
+<style>
+label {
+  color: white;
+  background-color: red;
+  padding: 6px;
+  border-radius: 12px;
+}
+</style>
+
+<label for="file_photo">
+    ＋写真を選択
+    <input type="file" id="file_photo" style="display:none;">
+</label>
+
+<input type="button" accept="image/*">カメラ起動</input><br><br>
 <input type="file" accept="image/*" capture="camera" id="camera">
 <img id="frame">
 <script>
