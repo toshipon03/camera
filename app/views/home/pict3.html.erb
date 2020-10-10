@@ -1,19 +1,13 @@
-<script>
-  function ohayou() {
-  alert("Hello!");
-}
-</script>
-<h1>HTML5カメラ</h1>
-<input type="button" value="OK" onclick="ohayou()">
-<video id="camera" width="300" height="200"></video><br>
-<form>
-  <button type="button" id="shutter">シャッター</button>
-</form><br><br>
-<canvas id="picture" width="300" height="200"></canvas>
-<form>
-  <a type="button" href="/home/next1">取り込み</a>
-</form>
+<video id="camera" width="720px" autoplay></video>
 
-<audio id="se" preload="auto">
-  <source src="camera-shutter1.mp3" type="audio/mp3">
-</audio>
+<script>
+  function notify_change_size() {
+      var video = document.getElementById('camera');
+      video_layout_width  = video.clientWidth
+      video_layout_height = video.clientHeight
+  }
+
+  var videoElement = document.querySelector('video#camera');
+  //onresizeメッセージのコールバック関数を設定する
+  videoElement.onresize = notify_change_size;
+</script>
