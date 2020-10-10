@@ -9,7 +9,7 @@
   <button type="button" id="shutter">シャッター</button>
 </form><br><br>
 <canvas id="picture" width="300" height="200"></canvas>
-<canvas2 id="picture"></canvas2>
+<canvas id="picture2"></canvas>
 <form>
   <a type="button" href="/home/next1">取り込み</a>
 </form>
@@ -22,6 +22,8 @@
 window.onload = () => {
   const video  = document.querySelector("#camera");
   const canvas = document.querySelector("#picture");
+  const canvas2 = document.querySelector("#picture2");
+
   const se     = document.querySelector('#se');
 
   /** カメラ設定 */
