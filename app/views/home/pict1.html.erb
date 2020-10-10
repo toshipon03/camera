@@ -23,8 +23,8 @@ window.onload = () => {
   const constraints = {
     audio: false,
     video: {
-      width: 300,
-      height: 200,
+      width: 1280,
+      height: 960,
       //facingMode: "user"   // フロントカメラを利用する
       facingMode: { exact: "environment" }  // リアカメラを利用する場合
     }
@@ -58,7 +58,7 @@ window.onload = () => {
     }, 500);
 
     // canvasに画像を貼り付ける
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0,1280,960);
   });
 };
 </script>
